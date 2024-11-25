@@ -7,7 +7,7 @@ import os
 vertboxnum = 19 #height of picture in grids
 horboxnum = 11 #width of picture in grids
 imagepath = "/Users/skyla/Downloads/IMG_0018.jpg" #path of desired image
-replacement = [255, 105, 180] #replacement color for modified image
+threshold = 20000 #change higher if >4 colors, change lower if <4 colors
 
 # Read the image
 image = cv2.imread(imagepath)
@@ -28,7 +28,6 @@ print("channels: ", channels)
 
 #create a dictionary
 d = {}
-orangepixels = 0
 # Iterate through each pixel
 for y in range(height):
     for x in range(width):
@@ -46,7 +45,7 @@ for y in range(height):
 
 for key in d:
     value = d[key]
-    if (d[key] > 20000):
+    if (value > threshold):
         print("RGB value: ", key)
         print("pixel number: ", value)
         ratio = value/width/height
@@ -55,7 +54,6 @@ for key in d:
         widthinch = horboxnum/5
         print("surface area: ", ratio*heightinch*widthinch)
         print("\n")
-cv2.imwrite("modified_image.jpg", image)
 print("done writing!")
 
 
