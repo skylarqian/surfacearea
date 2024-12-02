@@ -4,9 +4,9 @@ import cv2
 import os
 
 #modify these values!
-vertboxnum = 18 #height of picture in grids
-horboxnum = 10 #width of picture in grids
-imagepath = "/Users/skyla/Desktop/insect3annotated.png" #path of desired image
+vertboxnum = 23 #height of picture in grids
+horboxnum = 13 #width of picture in grids
+imagepath = "/Users/skyla/Desktop/insect7.png" #path of desired image
 threshold = 5000 #change higher if >4 colors, change lower if <4 colors
 
 # Read the image
@@ -31,17 +31,18 @@ d = {}
 # Iterate through each pixel
 for y in range(height):
     for x in range(width):
-        # Get the pixel value at (x, y)
-        pixel = tuple(image[y, x])
+        if x > width*4/13 or y > height*7/23:
+            # Get the pixel value at (x, y)
+            pixel = tuple(image[y, x])
 
-        if pixel in d:
-            d[pixel] = d[pixel] + 1
-        else:
-            d[pixel] = 1
-        # # Do something with the pixel value
-        # if np.all(pixel == orange):
-        #     orangepixels += 1 
-        #     image[y, x] = replacement
+            if pixel in d:
+                d[pixel] = d[pixel] + 1
+            else:
+                d[pixel] = 1
+            # # Do something with the pixel value
+            # if np.all(pixel == orange):
+            #     orangepixels += 1 
+            #     image[y, x] = replacement
 
 for key in d:
     value = d[key]
