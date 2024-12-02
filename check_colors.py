@@ -6,8 +6,8 @@ import cv2
 import os
 
 #modify these values!
-d = {(0, 157, 250): [0, 255, 246], (255, 111, 0): [191, 255, 0], (36, 54, 237): [255, 0, 234], (145, 45, 97): [255, 0, 34]} #dictionary that stores the RGB colors that appear (key) with the color it should be replaced with (value)
-imagepath = "/Users/skyla/Downloads/IMG_0018.jpg" #path of desired image
+d = {(41, 51, 236): [0, 255, 246], (40, 51, 236): [0, 255, 246], (52, 139, 240): [191, 255, 0], (245, 64, 0): [255, 0, 234], (76, 249, 120): [255, 0, 34]} #dictionary that stores the RGB colors that appear (key) with the color it should be replaced with (value)
+imagepath = "/Users/skyla/Desktop/insect3annotated.png" #path of desired image
 replacementpath = "modified_image.jpg" #replacement image path
 
 # Read the image

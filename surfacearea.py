@@ -4,10 +4,10 @@ import cv2
 import os
 
 #modify these values!
-vertboxnum = 19 #height of picture in grids
-horboxnum = 11 #width of picture in grids
-imagepath = "/Users/skyla/Downloads/IMG_0018.jpg" #path of desired image
-threshold = 20000 #change higher if >4 colors, change lower if <4 colors
+vertboxnum = 18 #height of picture in grids
+horboxnum = 10 #width of picture in grids
+imagepath = "/Users/skyla/Desktop/insect3annotated.png" #path of desired image
+threshold = 5000 #change higher if >4 colors, change lower if <4 colors
 
 # Read the image
 image = cv2.imread(imagepath)
