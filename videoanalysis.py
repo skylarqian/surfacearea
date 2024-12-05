@@ -16,6 +16,8 @@ while True:
     if not ret:
         break  # Break the loop if the video has ended
     
+    height, width = frame.shape[:2] 
+
     # Convert the frame to grayscale
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
@@ -33,20 +35,25 @@ while True:
     if contours:
         # Find the largest contour (this assumes the object is the largest white shape in the frame)
         #largest_contour = min(contours, key=cv2.contourArea)
-        contours = sorted(contours, key=cv2.contourArea, reverse=True)[3:10]
-        for largest_contour in contours:
+        contours = [x for x in contours if 6000 > cv2.contourArea(x) > 1000]
+        sorted_contours = []
+        #sorted(contours, key=cv2.contourArea, reverse=True)[3:10]
+        for contour in contours:
             # Get the bounding box of the largest contour
-            x, y, w, h = cv2.boundingRect(largest_contour)
+            x, y, w, h = cv2.boundingRect(contour)
+            if width*2/3 > x > width/3:
+                sorted_contours.append(contour)
+                # Draw the bounding box around the tracked object
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
         
-            # Draw the bounding box around the tracked object
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-        
-            # Optionally, find the center of the object and draw a point
-            center = (x + w // 2, y + h // 2)
-            cv2.circle(frame, center, 5, (0, 0, 255), -1)
-    
+                # Optionally, find the center of the object and draw a point
+                center = (x + w // 2, y + h // 2)
+                cv2.circle(frame, center, 5, (0, 0, 255), -1)
+    output_image = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+    cv2.drawContours(output_image, sorted_contours, -1, (0, 255, 0), 2)
     # Display the result
-    cv2.imshow('Tracked Object', frame)
+    cv2.imshow('traced contour', output_image)
+    #cv2.imshow('Tracked Object', frame)
     
     # Break the loop when the user presses 'q'
     if cv2.waitKey(1) & 0xFF == ord('q'):
